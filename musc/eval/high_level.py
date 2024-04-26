@@ -1,8 +1,8 @@
 from collections.abc import Iterable, Sequence
 from typing import Any, Literal, overload
 
-from musc.evaluator.a import Evaluator as EvaluatorLowLevel
-from musc.evaluator.a2 import Evaluator2 as EvaluatorLowLevel2
+from musc.eval.a import Evaluator as EvaluatorLowLevel
+from musc.eval.a2 import Evaluator2 as EvaluatorLowLevel2
 from musc.service.concepts.a import Metric, UpdateStrategy
 from musc.service.concepts.high_level.a import apply_model_adaptors
 from musc.service.impl.dd_process.stats import Stats

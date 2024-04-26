@@ -111,7 +111,7 @@ class Metric(Generic[Y, YP]):
         except ImportError:
             self._torch_tensor_class = None
 
-    def __call__(self, *, y: Y, y_pred: YP) -> int | float:
+    def __call__(self, *, y: Y, y_pred: YP) -> float:
         if self._pred_first:
             metric_value = self._callable(y_pred, y)
         else:

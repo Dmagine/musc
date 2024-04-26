@@ -16,7 +16,7 @@ from typing import Any, Generic, Literal, TypeVar
 import pandas as pd
 
 from musc.commons import safe_save
-from musc.evaluator.high_level import Evaluator
+from musc.eval.high_level import Evaluator
 from musc.hpo.a import ExhaustiveSearch, RandomizedSearch, Sample
 from musc.hpo.distr.a import BaseDistribution
 from musc.hpo.distr.high_level import into_distr

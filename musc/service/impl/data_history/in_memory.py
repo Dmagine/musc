@@ -5,7 +5,7 @@ from typing import Generic, TypeVar
 
 from readerwriterlock.rwlock import RWLockFair
 
-from musc.evaluator.active_count import BaseActiveCount
+from musc.eval.active_count import BaseActiveCount
 from musc.service.errors import ServiceErrorByDuplicatedId, ServiceErrorFromModelPrediction
 from musc.service.impl.data_history.base import (
     BaseDataHistory,

@@ -4,7 +4,7 @@ from multiprocessing.pool import ThreadPool
 from threading import Lock
 from typing import Any
 
-from musc.evaluator.active_count import ActiveCount
+from musc.eval.active_count import ActiveCount
 from musc.service.a import Service
 from musc.service.concepts.a import BaseModel, UpdateStrategy
 from musc.service.impl.dd_process.stats import Stats

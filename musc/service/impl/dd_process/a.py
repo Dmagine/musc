@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from threading import Thread
 from typing import Generic, TypeVar
 
-from musc.evaluator.active_count import BaseActiveCount
+from musc.eval.active_count import BaseActiveCount
 from musc.service.concepts.a import UpdateStrategy
 from musc.service.impl.model_wrapper import ModelWrapper
 from musc.service.impl.data_history.base import BaseDataHistory

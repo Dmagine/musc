@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Generic, TypeVar
 
-from musc.evaluator.active_count import BaseActiveCount, NullActiveCount
+from musc.eval.active_count import BaseActiveCount, NullActiveCount
 from musc.service.concepts.a import BaseModel, UpdateStrategy
 from musc.service.impl.model_wrapper import ModelWrapper
 from musc.service.impl.data_history.base import BaseDataHistory

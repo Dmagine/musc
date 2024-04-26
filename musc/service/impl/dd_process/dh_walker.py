@@ -6,7 +6,7 @@ from queue import Queue
 from threading import Lock
 from typing import Generic, Literal, TypeVar, overload
 
-from musc.evaluator.active_count import BaseActiveCount, NullActiveCount
+from musc.eval.active_count import BaseActiveCount, NullActiveCount
 from musc.service.impl.model_wrapper import ModelPredictionProcess, ModelWrapper, Prediction
 from musc.service.impl.data_history.base import (
     BaseDataHistory,

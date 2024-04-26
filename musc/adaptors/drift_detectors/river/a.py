@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import typing
+from numbers import Number
 from typing import Any
 
 from river.base import BinaryDriftDetector, DriftDetector
@@ -15,7 +17,8 @@ class DriftDetectorByRiver(BaseDriftDetector):
 
     def step(self, x: Any, y: Any, y_pred: Any) -> DriftDetected | None:
         del x
-        self._drift_detector.update(self._metric(y=y, y_pred=y_pred))
+        # https://github.com/python/mypy/issues/3186
+        self._drift_detector.update(typing.cast(Number, self._metric(y=y, y_pred=y_pred)))
         return DriftDetected(None) if self._drift_detector.drift_detected else None
 
     def clone_without_state(self) -> DriftDetectorByRiver:
@@ -45,7 +48,7 @@ class DriftDetectorByRiverWithNcl(BaseDriftDetectorWithNcl):
 
     def step(self, x: Any, y: Any, y_pred: Any) -> DriftDetected | None:
         del x
-        self._drift_detector.update(self._metric(y=y, y_pred=y_pred))
+        self._drift_detector.update(typing.cast(Number, self._metric(y=y, y_pred=y_pred)))
         ncl = self._drift_detector.new_concept_length  # type: ignore
         return DriftDetected(ncl) if ncl is not None else None
 

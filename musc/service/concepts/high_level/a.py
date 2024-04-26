@@ -67,13 +67,13 @@ class UpdateStrategySubclass(UpdateStrategy):
         ).__repr__()
 
 
-class UpdateStrategyNone(UpdateStrategySubclass):
+class UpdateStrategyBlank(UpdateStrategySubclass):
 
     def __init__(self) -> None:
         super().__init__(DriftDetectorNone(), updator_no_op, 0, False)
 
-    def clone_without_state(self) -> UpdateStrategyNone:
-        return UpdateStrategyNone()
+    def clone_without_state(self) -> UpdateStrategyBlank:
+        return UpdateStrategyBlank()
 
 
 class UpdateStrategyByPeriodicallyUpdate(UpdateStrategySubclass):
@@ -175,7 +175,7 @@ def updator_no_op(model: BaseModel, x_arr: list[Any], y_arr: list[Any]) -> None:
 
 __all__ = [
     'ModelGuard',
-    'UpdateStrategyNone',
+    'UpdateStrategyBlank',
     'UpdateStrategyByPeriodicallyUpdate',
     'UpdateStrategyByDriftDetection',
     'apply_model_adaptors',
