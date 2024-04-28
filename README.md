@@ -137,3 +137,7 @@ Note that in the above example the search space of drift detector is not specifi
 * The evaluation is more accurate than existing approaches.
 
 * The hyperparameter optimization support utilizing multiple GPUs.
+
+## Acknowledgement
+
+This project is supported by the National Key R&D Program of China (2021YFB1715200).
