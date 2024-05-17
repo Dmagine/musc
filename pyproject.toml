@@ -1,7 +1,7 @@
 [project]
 name = "musc"
 version = "0.1.0"
-description = ""
+description = "A library to construct concept drift adaptive model services."
 authors = [{ name = "YANG Qi", email = "y3tothe6@outlook.com" }]
 dependencies = [
     "flask>=3.0.0",

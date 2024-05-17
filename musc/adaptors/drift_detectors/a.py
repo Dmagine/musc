@@ -6,14 +6,14 @@ from typing import Any
 from musc.service.concepts.a import BaseDriftDetectorWithNcl, DriftDetected
 
 
-class DriftDetectorNone(BaseDriftDetectorWithNcl):
+class DriftDetectorBlank(BaseDriftDetectorWithNcl):
 
     def step(self, x: Any, y: Any, y_pred: Any) -> DriftDetected | None:
         del x, y, y_pred
         return None
 
-    def clone_without_state(self) -> DriftDetectorNone:
-        return DriftDetectorNone()
+    def clone_without_state(self) -> DriftDetectorBlank:
+        return DriftDetectorBlank()
 
 
 class DriftDetectorPeriodicallyUpdate(BaseDriftDetectorWithNcl):
@@ -37,7 +37,7 @@ class DriftDetectorPeriodicallyUpdate(BaseDriftDetectorWithNcl):
         if self._cnt % self._period == 0:
             if self._probability is not None and random.random() >= self._probability:
                 return None
-            if self._ncl <= -1:
+            elif self._ncl <= -1:
                 return DriftDetected(self._cnt)
             else:
                 return DriftDetected(min(self._ncl, self._cnt))
@@ -49,6 +49,6 @@ class DriftDetectorPeriodicallyUpdate(BaseDriftDetectorWithNcl):
 
 
 __all__ = [
-    'DriftDetectorNone',
+    'DriftDetectorBlank',
     'DriftDetectorPeriodicallyUpdate',
 ]

@@ -1,8 +1,10 @@
 # musc
 
-![](https://img.shields.io/pypi/v/musc)
+[![](https://img.shields.io/pypi/v/musc)](https://pypi.org/project/musc/)
 
 musc (**m**odel **u**pdate **s**trategy **c**onstruction) is a Python library aiming to help users to construct concept drift adaptive model services.
+
+Note: SemVer is not yet followed in 0.1.x versions.
 
 ## Preliminary
 
@@ -80,7 +82,7 @@ strategy = musc.UpdateStrategyByDriftDetection(
 )
 ```
 
-To construct this kind of strategy, instead of specifying the update period, you need to specify a concept drift detector from [River](https://github.com/online-ml/river) and a `musc.Metric` object which calculate metric value for each pair of prediction and label, which is needed by the drift detector. You also need to tell the model service how much data is needed within a model update by the `data_amount_required` argument, so that after the drift detector reports a drift, the model service can collect an appropriate amount of labelled data for your model updator.
+To construct this kind of strategy, instead of specifying the update period, you need to specify a concept drift detector from [River](https://github.com/online-ml/river) and a `musc.Metric` object which calculates metric value for each pair of prediction and label, which is needed by the drift detector. You also need to tell the model service how much data is needed within a model update by the `data_amount_required` argument, so that after the drift detector reports a drift, the model service can collect an appropriate amount of labelled data for your model updator.
 
 ### Evaluation of model update strategy
 

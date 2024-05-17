@@ -1,7 +1,7 @@
 from musc.eval.high_level import Evaluator
 from musc.hpo.distr.high_level import SingleValue, into_distr
 from musc.hpo.high_level.a import UpdateStrategySearch
-from musc.service.concepts.a import BaseModel, Metric
+from musc.service.concepts.a import BaseDriftDetector, BaseModel, DriftDetected, Metric
 from musc.service.concepts.high_level.a import (
     UpdateStrategyByDriftDetection,
     UpdateStrategyByPeriodicallyUpdate,
@@ -12,7 +12,9 @@ from musc.service.high_level import Service, run_service_http
 from . import drift_detectors
 
 __all__ = [
+    'BaseDriftDetector',
     'BaseModel',
+    'DriftDetected',
     'Evaluator',
     'Metric',
     'Service',

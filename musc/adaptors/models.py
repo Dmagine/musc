@@ -115,7 +115,7 @@ else:
             self._model = model
 
         def predict(self, x: np.ndarray) -> np.ndarray:
-            return self._model.predict(np.array([x]))[0]
+            return self._model.predict([x])[0]
 
         def inner(self) -> Any:
             return self._model

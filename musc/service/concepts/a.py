@@ -80,16 +80,21 @@ class BaseDriftDetector(Generic[X, Y, YP], ABC):
     def step(self, x: X, y: Y, y_pred: YP) -> DriftDetected | None:
         pass
 
-    @abstractmethod
+    def reset(self) -> None:
+        raise NotImplementedError
+
     def clone_without_state(self) -> BaseDriftDetector[X, Y, YP]:
-        pass
+        cloned = deepcopy(self)
+        cloned.reset()
+        return cloned
 
 
 class BaseDriftDetectorWithNcl(Generic[X, Y, YP], BaseDriftDetector[X, Y, YP]):
 
-    @abstractmethod
     def clone_without_state(self) -> BaseDriftDetectorWithNcl[X, Y, YP]:
-        pass
+        cloned = deepcopy(self)
+        cloned.reset()
+        return cloned
 
 
 class Metric(Generic[Y, YP]):

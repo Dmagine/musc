@@ -5,12 +5,14 @@ from typing import Any, Generic, TypeVar
 
 from river.base import BinaryDriftDetector, DriftDetector
 
-from musc.adaptors.drift_detectors.a import DriftDetectorNone, DriftDetectorPeriodicallyUpdate
+from musc.adaptors.drift_detectors.a import DriftDetectorBlank, DriftDetectorPeriodicallyUpdate
 from musc.adaptors.drift_detectors.river.a import (
     DriftDetectorByRiver,
     DriftDetectorByRiverBinary,
-    DriftDetectorByRiverBinaryWithNcl,
-    DriftDetectorByRiverWithNcl,
+    DriftDetectorByRiverBinaryWithAutoNcl,
+    DriftDetectorByRiverBinaryWithManualNcl,
+    DriftDetectorByRiverWithAutoNcl,
+    DriftDetectorByRiverWithManualNcl,
 )
 from musc.adaptors.drift_detectors.river.with_kdp import ADWIN, PageHinkley, kswin_distr_prelude
 from musc.hpo.distr.a import BaseDistribution
@@ -70,7 +72,7 @@ class UpdateStrategySubclass(UpdateStrategy):
 class UpdateStrategyBlank(UpdateStrategySubclass):
 
     def __init__(self) -> None:
-        super().__init__(DriftDetectorNone(), updator_no_op, 0, False)
+        super().__init__(DriftDetectorBlank(), updator_no_op, 0, False)
 
     def clone_without_state(self) -> UpdateStrategyBlank:
         return UpdateStrategyBlank()
@@ -102,25 +104,34 @@ class UpdateStrategyByDriftDetection(UpdateStrategySubclass):
         updator: Callable[[Any, list[Any], list[Any]], None],
         data_amount_required: int,
         metric: Metric | None = None,
-        use_ncl: bool | None = None,
+        use_ncl: bool | int | None = None,
     ) -> None:
         if isinstance(drift_detector, BinaryDriftDetector):
-            if not hasattr(drift_detector, 'new_concept_length'):
+            if type(use_ncl) is int:
+                drift_detector_ = DriftDetectorByRiverBinaryWithManualNcl(drift_detector, use_ncl)
+            elif not hasattr(drift_detector, 'new_concept_length'):
                 drift_detector_ = DriftDetectorByRiverBinary(drift_detector)
             else:
-                drift_detector_ = DriftDetectorByRiverBinaryWithNcl(drift_detector)
+                drift_detector_ = DriftDetectorByRiverBinaryWithAutoNcl(drift_detector)
         elif isinstance(drift_detector, DriftDetector):
             if metric is None:
                 raise TypeError
-            if not hasattr(drift_detector, 'new_concept_length'):
+            if type(use_ncl) is int:
+                drift_detector_ = DriftDetectorByRiverWithManualNcl(drift_detector, metric, use_ncl)
+            elif not hasattr(drift_detector, 'new_concept_length'):
                 drift_detector_ = DriftDetectorByRiver(drift_detector, metric)
             else:
-                drift_detector_ = DriftDetectorByRiverWithNcl(drift_detector, metric)
+                drift_detector_ = DriftDetectorByRiverWithAutoNcl(drift_detector, metric)
         else:
             raise TypeError
         drift_detector_ = drift_detector_.clone_without_state()
         updator_ = UpdatorWrapper(updator)
-        use_ncl = use_ncl if use_ncl is not None else hasattr(drift_detector, 'new_concept_length')
+        if type(use_ncl) is int:
+            use_ncl = True
+        elif type(use_ncl) is bool:
+            use_ncl = use_ncl
+        else:
+            use_ncl = hasattr(drift_detector, 'new_concept_length')
         super().__init__(drift_detector_, updator_, data_amount_required, use_ncl)
 
     @staticmethod

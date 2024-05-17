@@ -31,8 +31,8 @@ class Evaluator:
         self,
         x_arr: Iterable[Any],
         y_arr: Iterable[Any],
-        t_x_arr: Iterable[Any],
-        t_y_arr: Iterable[Any],
+        t_x_arr: Iterable[float],
+        t_y_arr: Iterable[float],
     ) -> tuple[list[Any], Stats]:
         pass
 
@@ -41,8 +41,8 @@ class Evaluator:
         self,
         x_arr: Iterable[Any],
         y_arr: Iterable[Any],
-        t_x_arr: Iterable[Any],
-        t_y_arr: Iterable[Any],
+        t_x_arr: Iterable[float],
+        t_y_arr: Iterable[float],
         metric: Metric,
     ) -> tuple[float, Stats]:
         pass
@@ -52,8 +52,8 @@ class Evaluator:
         self,
         x_arr: Iterable[Any],
         y_arr: Iterable[Any],
-        t_x_arr: Iterable[Any],
-        t_y_arr: Iterable[Any],
+        t_x_arr: Iterable[float],
+        t_y_arr: Iterable[float],
         metric: Sequence[Metric],
     ) -> tuple[list[float], Stats]:
         pass
@@ -62,8 +62,8 @@ class Evaluator:
         self,
         x_arr: Iterable[Any],
         y_arr: Iterable[Any],
-        t_x_arr: Iterable[Any],
-        t_y_arr: Iterable[Any],
+        t_x_arr: Iterable[float],
+        t_y_arr: Iterable[float],
         metric: Metric | Sequence[Metric] | None = None,
     ) -> tuple[float | list[float] | list[Any], Stats]:
 

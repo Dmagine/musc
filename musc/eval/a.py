@@ -37,8 +37,8 @@ class Evaluator:
         self,
         x_arr: Iterable[Any],
         y_arr: Iterable[Any],
-        t_x_arr: Iterable[Any],
-        t_y_arr: Iterable[Any],
+        t_x_arr: Iterable[float],
+        t_y_arr: Iterable[float],
     ) -> tuple[list[Any], Stats]:
         with self._evaluated[1]:
             if self._evaluated[0]:
